@@ -38,13 +38,12 @@ For commercial application and licensing inquiries, contact at info@bhavyattabha
 ## Author
 
 Bhavyatta Bhardwaj  
-Independent Researcher  
-Hamilton, ON, Canada  
+Independent Researcher, Canada  
 info@bhavyattabhardwaj.com
 
 ## Version
 
-v1.0 — initial release
+v1.0 - initial release
 
 ## Related work
 
