@@ -4,7 +4,7 @@
 
 **Version:** 1.0  
 **Author:** Bhavyatta Bhardwaj  
-**Affiliation:** Independent Researcher, Danuma, Hamilton, ON, Canada  
+**Affiliation:** Independent Researcher, Danuma, Canada  
 **Contact:** info@bhavyattabhardwaj.com  
 **License:** Creative Commons Attribution 4.0 International (CC BY 4.0). Commercial application and licensing inquiries: Danuma.  
 **Suggested citation:** Bhardwaj, B. (2026). _Vulnerability Management for Policy Design (VMPD): A Methodology for Diagnosing Structural Failures in Governance Regimes_, v1.0. Zenodo. [DOI to be assigned upon deposit]
