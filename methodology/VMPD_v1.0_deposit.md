@@ -258,6 +258,6 @@ Scott, J. C. (1998). _Seeing Like a State: How Certain Schemes to Improve the H
 
 **Author contribution:** Conceptualisation, methodology design, scoring framework, writing: B.B.
 
-**Use of AI tools in preparation:** Claude (Anthropic) was used during the preparation of this deposit document for editorial structuring and drafting support. All methodological content, conceptual claims, and scoring criteria are the author's own.
+**Use of AI tools in preparation:** Claude (Anthropic) was used during the revision of this deposit. All methodological content, conceptual claims, and scoring criteria are the author's own.
 
 **Contact for licensing inquiries:** Danuma. info@bhavyattabhardwaj.com
