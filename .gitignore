@@ -1,0 +1,19 @@
+.DS_Store
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+# Virtual environments
+venv/
+env/
+.venv/
+# Editor
+.vscode/
+.idea/
+# Local outputs (you may want to keep some, but exclude scratch)
+outputs/scratch/
+# Environment files
+.env
+.env.local
