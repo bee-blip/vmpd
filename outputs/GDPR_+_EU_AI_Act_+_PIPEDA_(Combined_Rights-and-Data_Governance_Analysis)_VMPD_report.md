@@ -1,7 +1,7 @@
 # VMPD Analysis: GDPR + EU AI Act + PIPEDA (Combined Rights-and-Data Governance Analysis)
 
 **Analyst:** Bhavyatta Bhardwaj  
-**Date:** 2026-05-01  
+**Date:** 2026-05-12  
 **Methodology:** Vulnerability Management for Policy Design (VMPD) v1.0
 
 ## Regime Context
