@@ -377,27 +377,35 @@ def radar_chart(vulnerability: Vulnerability, save_path: Optional[str] = None):
     angles_plot = angles + [angles[0]]
     labels_plot = labels + [labels[0]]
 
-    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
-    ax.plot(angles_plot, scores_plot, linewidth=2, color='#2C3E50')
-    ax.fill(angles_plot, scores_plot, alpha=0.25, color='#2C3E50')
+def radar_chart(vulnerability: Vulnerability, save_path: Optional[str] = None):
+    dimensions = DIMENSION_NAMES
+    labels = [DIMENSION_DISPLAY_NAMES[d] for d in dimensions]
+    scores = [vulnerability.dimension_score(d) for d in dimensions]
+
+    angles = np.linspace(0, 2 * np.pi, len(dimensions), endpoint=False).tolist()
+    scores_plot = scores + [scores[0]]
+    angles_plot = angles + [angles[0]]
+
+    fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True), constrained_layout=True)
+    ax.plot(angles_plot, scores_plot, linewidth=2, color="#2C3E50")
+    ax.fill(angles_plot, scores_plot, alpha=0.25, color="#2C3E50")
     ax.set_xticks(angles)
     ax.set_xticklabels(labels, size=11)
     ax.set_ylim(0, 10)
     ax.set_yticks([2, 4, 6, 8, 10])
-    ax.set_yticklabels(['2', '4', '6', '8', '10'], size=9)
+    ax.set_yticklabels(["2", "4", "6", "8", "10"], size=9)
     ax.grid(True, alpha=0.3)
-
-    title = f"{vulnerability.name}\nBase Score: {vulnerability.base_score()} ({vulnerability.severity_label()})"
-    plt.title(title, size=13, pad=20)
+    ax.set_title(
+        f"{vulnerability.name}\nBase Score: {vulnerability.base_score()} ({vulnerability.severity_label()})",
+        size=13,
+        pad=20,
+    )
 
     if save_path:
-        plt.savefig(save_path, bbox_inches='tight', dpi=150)
-    plt.tight_layout()
+        fig.savefig(save_path, bbox_inches="tight", dpi=150)
     return fig
 
-
 def comparison_chart(analysis: Analysis, save_path: Optional[str] = None):
-    """Generate a comparison bar chart of all vulnerabilities in an analysis."""
     if not analysis.vulnerabilities:
         print("No vulnerabilities to plot.")
         return None
@@ -406,26 +414,32 @@ def comparison_chart(analysis: Analysis, save_path: Optional[str] = None):
     scores = [v.base_score() for v in analysis.vulnerabilities]
     severities = [v.severity_label() for v in analysis.vulnerabilities]
 
-    color_map = {"Low": "#27AE60", "Moderate": "#F39C12",
-                 "High": "#E67E22", "Severe": "#C0392B"}
+    color_map = {"Low": "#27AE60", "Moderate": "#F39C12", "High": "#E67E22", "Severe": "#C0392B"}
     colors = [color_map[s] for s in severities]
 
-    fig, ax = plt.subplots(figsize=(10, max(4, len(names) * 0.6)))
+    fig, ax = plt.subplots(figsize=(12, max(5, len(names) * 0.7)), constrained_layout=True)
     bars = ax.barh(names, scores, color=colors)
     ax.set_xlim(0, 10)
     ax.set_xlabel("Base Vulnerability Score (0-10)")
     ax.set_title(f"VMPD Analysis: {analysis.regime_name}", size=13, pad=15)
-    ax.axvline(x=2.5, color='gray', linestyle='--', alpha=0.3)
-    ax.axvline(x=5.0, color='gray', linestyle='--', alpha=0.3)
-    ax.axvline(x=7.5, color='gray', linestyle='--', alpha=0.3)
-    ax.grid(True, alpha=0.3, axis='x')
+    ax.axvline(x=2.5, color="gray", linestyle="--", alpha=0.3)
+    ax.axvline(x=5.0, color="gray", linestyle="--", alpha=0.3)
+    ax.axvline(x=7.5, color="gray", linestyle="--", alpha=0.3)
+    ax.grid(True, alpha=0.3, axis="x")
+
+    for bar, score in zip(bars, scores):
+        ax.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height() / 2, f"{score}", va="center", size=10)
+
+    if save_path:
+        fig.savefig(save_path, bbox_inches="tight", dpi=150)
+    return fig
 
     # Add score labels on bars
     for bar, score in zip(bars, scores):
         ax.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height()/2,
                 f'{score}', va='center', size=10)
 
-    plt.tight_layout()
+    plt.tight_layout(pad=2.0)
     if save_path:
         plt.savefig(save_path, bbox_inches='tight', dpi=150)
     return fig
@@ -491,7 +505,7 @@ def generate_report(analysis: Analysis, output_dir: str = "outputs") -> str:
         ])
         if v.beneficiaries:
             lines.extend([f"**Beneficiaries of vulnerability:** {v.beneficiaries}", ""])
-        if v. impacted_populations:
+        if v.impacted_populations:
             lines.extend([f"**Cost bearers:** {v. impacted_populations}", ""])
         lines.append("---")
         lines.append("")
